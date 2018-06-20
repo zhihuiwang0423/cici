@@ -1,11 +1,12 @@
 {
-  "extends": "standard",
+  "extends": "vue",
   "plugins": [
     "html",
     "vue"
   ],
   "rules": {
-    "no-new": "off"
+    "no-new": "off",
+    "prefer-const": "off"
   },
   "parser": "babel-eslint",
   "parserOptions": {
