@@ -3,15 +3,20 @@
 import Vue from 'vue'
 import App from './App'
 import { CreateRouter } from './router'
-
+import { CreateStore } from './store'
+import { sync } from 'vuex-router-sync'
 Vue.config.productionTip = false
 export function createApp () {
   const router = new CreateRouter()
+  const store = new CreateStore()
+  // 同步路由状态route state 到store
+  sync(store, router)
   const app = new Vue({
     router,
+    store,
     render: h => h(App)
   })
-  return { app, router }
+  return { app, router, store }
 }
 /* eslint-disable no-new */
 // new Vue({

@@ -80,6 +80,7 @@
         </a>
       </li>
     </ul>
+    <router-link to="/Test">test</router-link>
   </div>
 </template>
 

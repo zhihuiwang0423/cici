@@ -28,12 +28,14 @@ function createRenderer (bundle, options) {
 let renderer
 let readyPromise
 if (isProd) {
+  // 生产环境直接读取build生成的文件
   const bundle = require('./dist/vue-ssr-server-bundle.json')
   const clientManifest = require('./dist/vue-ssr-client-manifest.json')
   renderer = createRenderer(bundle, {
     clientManifest
   })
 } else {
+  // 开发环境下使用dev-server来通过回调把生成在内存中的文件赋值
   readyPromise = require('./build/setup-dev-server')(app,
     (bundle, options) => {
       renderer = createRenderer(bundle, options)
