@@ -14,10 +14,11 @@
   <div v-if="show">
     waiting
   </div>
+  <div :class="active">{{fullSum}}</div>
 </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -34,9 +35,16 @@ export default {
     }
   },
   computed: {
-    show: function () {
-      return this.$store.state.waiting
-    }
+    // show: function () {
+    //   return this.$store.state.waiting
+    // }
+    ...mapState({
+      show: (state) => state.waiting
+    }),
+    // fullSum () {
+    //   return this.$store.getters.fullSum
+    // }
+    ...mapGetters(['fullSum'])
   },
   methods: {
     // babelrc

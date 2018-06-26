@@ -11,7 +11,10 @@ export function CreateStore () {
     state: {
       count: 0,
       sum: 1,
-      waiting: false
+      waiting: false,
+      type: 'zhihui',
+      topicsData: ''
+
     },
     actions,
     mutations,

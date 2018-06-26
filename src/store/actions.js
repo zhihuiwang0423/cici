@@ -1,3 +1,4 @@
+import axios from 'axios'
 export default {
   // 异步操作
   // increment (context) {
@@ -24,5 +25,19 @@ export default {
       commit('HIDE_WAITING_MESSAGE')
       commit('INCREMENT_VALUE', intValue)
     }
+  },
+  FETCH_LIST_DATA: ({ commit }) => {
+    console.log('abc')
+    axios.get('https://cnodejs.org/api/v1/topics', {
+      params: {
+        page: 1,
+        tab: 'good'
+      }
+    }).then((res) => {
+      // this.topicsData = res.data.data
+      // this.$store.state.topicsData = res.data.data
+      console.log(res)
+      return commit('SET_ACTIVE_TYPE')
+    })
   }
 }

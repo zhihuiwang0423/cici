@@ -6,7 +6,8 @@
   ],
   "rules": {
     "no-new": "off",
-    "prefer-const": "off"
+    "prefer-const": "off",
+    "new-cap": "off"
   },
   "parser": "babel-eslint",
   "parserOptions": {

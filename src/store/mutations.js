@@ -19,5 +19,8 @@ export default {
   },
   HIDE_WAITING_MESSAGE: (state) => {
     state.waiting = false
+  },
+  SET_ACTIVE_TYPE: (state) => {
+    state.topicsData = 'abcccdedeeidkdk'
   }
 }

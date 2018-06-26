@@ -2,15 +2,21 @@ const path = require('path')
 const fs = require('fs')
 const Koa = require('koa')
 const { createBundleRenderer } = require('vue-server-renderer')
+const koaRouter = require('koa-router')
 const LRU = require('lru-cache')
-const app = new Koa()
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
 const resolve = file => path.resolve(__dirname, file)
 const template = fs.readFileSync(resolve('./index.html'), 'utf-8')
 const isProd = process.env.NODE_ENV === 'production'
+// const topstories = require('./build/api/topstories.json')
+// const newstories = require('./build/api/newstories.json')
 
 const serverInfo = `koa/${require('koa/package.json').version}|` +
-    `vue-server-renderer/${require('vue-server-renderer/package.json').version}`
+`vue-server-renderer/${require('vue-server-renderer/package.json').version}`
+
+const app = new Koa()
+const router = new koaRouter()
+
 function createRenderer (bundle, options) {
   return createBundleRenderer(
     bundle,
@@ -96,13 +102,21 @@ function render (ctx, next) {
   })
 }
 // response
-if (isProd) {
-  app.use(render)
-} else {
-  app.use((ctx, next) => {
-    return readyPromise.then(() => render(ctx, next))
-  })
-}
+router.get('https://cnodejs.org/api/v1/topics', (ctx, next) => {
+  console.log('abcccccc')
+  console.log(ctx.request.path)
+})
+router.get('*', isProd ? render : (ctx, next) => {
+  return readyPromise.then(() => render(ctx, next))
+})
+app.use(router.routes()).use(router.allowedMethods())
+// if (isProd) {
+//   app.use(render)
+// } else {
+//   app.use((ctx, next) => {
+//     return readyPromise.then(() => render(ctx, next))
+//   })
+// }
 app.listen(2345, () => {
   console.log('http://localhost:2345')
 })

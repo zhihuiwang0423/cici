@@ -2,6 +2,8 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Essential lalalalalla</h2>
+    <router-link to="/Top">top</router-link>
+
     <ul>
       <li>
         <a
