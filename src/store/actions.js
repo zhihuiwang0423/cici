@@ -27,17 +27,14 @@ export default {
     }
   },
   FETCH_LIST_DATA: ({ commit }) => {
-    console.log('abc')
-    axios.get('https://cnodejs.org/api/v1/topics', {
+    return axios.get('https://cnodejs.org/api/v1/topics', {
       params: {
         page: 1,
         tab: 'good'
       }
     }).then((res) => {
-      // this.topicsData = res.data.data
-      // this.$store.state.topicsData = res.data.data
-      console.log(res)
-      return commit('SET_ACTIVE_TYPE')
+      var data = res.data.data
+      commit('SET_ACTIVE_TYPE', { data })
     })
   }
 }

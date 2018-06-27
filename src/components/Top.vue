@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- <div>{{this.$store.state.topicsData}}</div> -->
-    <ul class="topic_content" v-if="topicsData">
-      <li v-for="(item, index) in topicsData" :key="index">
+    <div>{{this.$store.getters.topicsGet}}</div>
+    <ul class="topic_content" v-if="this.topicsData">
+      <li v-for="(item, index) in this.topicsData" :key="index">
         <div class="author" @click="showDetailAboutAthor(item.author.loginname)">
           <img :src="item.author.avatar_url" alt="用户图像" :title="item.author.loginname">
         </div>
@@ -31,26 +31,28 @@
   </div>
 </template>
 <script>
- import axios from 'axios'
+//  import axios from 'axios'
 
 export default {
-   data () {
-     return {
-       topicsData: ''
-     }
-   },
-   mounted () {
-     // this.topicsData = this.$store.state.topicsData
-     axios.get('https://cnodejs.org/api/v1/topics', {
-       params: {
-         page: 1,
-         tab: 'good'
-       }
-     }).then((res) => {
-       this.topicsData = res.data.data
-       this.$store.state.topicsData = res.data.data
-     })
-   }
+  data () {
+    return {
+      topicsData: this.$store.state.topicsData
+    }
+  }
+  // mounted () {
+  //   console.log(this.$store.state.topicsData)
+  //   // this.topicsData = this.$store.state.topicsData
+  //   // this.topicsData = this.$store.state.topicsData
+  //   //  axios.get('https://cnodejs.org/api/v1/topics', {
+  //   //    params: {
+  //   //      page: 1,
+  //   //      tab: 'good'
+  //   //    }
+  //   //  }).then((res) => {
+  //   //    this.topicsData = res.data.data
+  //   //    this.$store.state.topicsData = res.data.data
+  //   //  })
+  // }
 }
 </script>
 <style scoped>

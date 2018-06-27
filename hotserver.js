@@ -102,10 +102,9 @@ function render (ctx, next) {
   })
 }
 // response
-router.get('https://cnodejs.org/api/v1/topics', (ctx, next) => {
-  console.log('abcccccc')
-  console.log(ctx.request.path)
-})
+// router.get('https://cnodejs.org/api/v1/topics', (ctx, next) => {
+//   console.log('a')
+// })
 router.get('*', isProd ? render : (ctx, next) => {
   return readyPromise.then(() => render(ctx, next))
 })

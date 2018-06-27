@@ -6,7 +6,6 @@ export default function createTopList (type) {
   return {
     name: `${type}-stories-view`,
     asyncData ({ store }) {
-      console.log('i am herer')
       return store.dispatch('FETCH_LIST_DATA', { type })
     },
     title: camelize(type),
